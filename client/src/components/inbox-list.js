@@ -49,7 +49,7 @@ function InboxList(props) {
                         </Grid>
                     </ExpansionPanelSummary>
                     <InboxListDetails 
-                        data={ sliceObject(val,nonDetailsCols)} 
+                        data={ sliceObject(val,nonDetailsCols) } 
                         index={index} />
                 </ExpansionPanel>)
             })

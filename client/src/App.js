@@ -2,6 +2,8 @@ import React from 'react';
 import './css/App.css';
 import InboxList from "./components/inbox-list";
 import updateIconStyles from "./styles/update-icon-styles";
+import { makeStyles,createStyles } from './styles/styles';
+import { AppBar,Paper,Toolbar, Typography } from "@material-ui/core";
 
 const sampleData = [{
   summary: '(HUE Version 4.0)Bug1',
@@ -45,13 +47,34 @@ const sampleData = [{
   Progress:'Evaluated',
 }]
 
+const useStyles = makeStyles(theme => createStyles({
+  paper: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+    width: '100%',
+  },
+}))
+
 function App() {
   const iconClasses = updateIconStyles();
+  const appClasses = useStyles();
   const nonDetailCols = ['Importance','Progress','summary'];
   return (
-    <div className="App">
-      <InboxList dataArr={sampleData} iconClass={iconClasses.icon}
-        nonDetailsCols={nonDetailCols}></InboxList>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography  variant='h6'>
+            Bug Trac Application
+          </Typography>
+
+        </Toolbar>
+      </AppBar>
+      <div className="App">
+        <Paper className={appClasses.paper} elevation={5}>
+          <InboxList dataArr={sampleData} iconClass={iconClasses.icon}
+            nonDetailsCols={nonDetailCols}></InboxList>
+        </Paper>
+      </div>
     </div>
   );
 }
