@@ -4,8 +4,8 @@ import { ExpansionPanelDetails, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => createStyles({
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        margin: theme.spacing(1),
+        // marginRight: theme.spacing(1),
     },
     container: {
         display: 'flex',
@@ -24,6 +24,7 @@ function InboxListDetails(props) {
                     <TextField
                         id={key+"-input"+index}
                         label={key}
+                        key={'text-field'+key+index+'-key'}
                         defaultValue={data[key]}
                         className={classes.textField}
                         margin="normal"

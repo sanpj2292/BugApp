@@ -1,45 +1,55 @@
 import React from 'react';
 import './css/App.css';
 import InboxList from "./components/inbox-list";
+import updateIconStyles from "./styles/update-icon-styles";
 
 const sampleData = [{
-  summary: 'Bug1',
+  summary: '(HUE Version 4.0)Bug1',
   Importance: 'Middle',
   Labo: 'CFM',
   MileStone:'V41_1902',
   Priority:'F',
+  Progress:'Developed',
   RealtionTickets: '62588',
 },{
-  summary: 'Bug2',
+  summary: '(HUE Version 4.0)Bug2',
   Importance: 'High',
   Labo: 'CAM',
   MileStone:'V41_1903',
   Priority:'F',
+  Progress:'New',
   RealtionTickets: '62589',
 },{
-  summary: 'Bug3',
+  summary: '(HUE Version 4.0)Bug3',
   Importance: 'High',
   Labo: 'CBM',
   MileStone:'V41_1906',
   Priority:'F',
   RealtionTickets: '62590',
-  Labo1: 'CBM1',
-  MileSton1e:'V41_19061',
-  Priority1:'F1',
-  RealtionTickets1: '62591',
+  Progress:'DevelopConfirmed',
 },{
-  summary: 'Bug4',
+  summary: '(HUE Version 4.0)Bug4',
   Importance: 'High',
   Labo: 'CCM',
   MileStone:'V41_1909',
   Priority:'F',
   RealtionTickets: '63595',
+  Progress:'Evaluated',
+},{
+  summary: '(HUE Version 4.0)Bug5',
+  Importance: 'Middle',
+  Labo: 'CCM',
+  MileStone:'V41_1909',
+  Priority:'F',
+  RealtionTickets: '63595',
+  Progress:'Evaluated',
 }]
 
 function App() {
+  const iconClasses = updateIconStyles();
   return (
     <div className="App">
-      <InboxList dataArr={sampleData}></InboxList>
+      <InboxList dataArr={sampleData} iconClass={iconClasses.icon}></InboxList>
     </div>
   );
 }
