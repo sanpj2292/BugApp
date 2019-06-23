@@ -47,9 +47,11 @@ const sampleData = [{
 
 function App() {
   const iconClasses = updateIconStyles();
+  const nonDetailCols = ['Importance','Progress','summary'];
   return (
     <div className="App">
-      <InboxList dataArr={sampleData} iconClass={iconClasses.icon}></InboxList>
+      <InboxList dataArr={sampleData} iconClass={iconClasses.icon}
+        nonDetailsCols={nonDetailCols}></InboxList>
     </div>
   );
 }

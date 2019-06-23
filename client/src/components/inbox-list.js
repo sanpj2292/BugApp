@@ -5,19 +5,21 @@ import ColoredLabelColumn from "./colored-label-column";
 import CheckIcon from "@material-ui/icons/Check";
 import updateButtonStyles from "../styles/update-button-styles";
 
-// const useStyles = makeStyles((theme) => ({
-//     button: {
-//         margin: theme.spacing(1),
-//     },
-// }),)
-
 function InboxList(props) {
     const classes = updateButtonStyles();
-    const {dataArr,iconClass} = {...props}
+    const {dataArr,iconClass,nonDetailsCols} = {...props}
 
     const [expanded, setExpanded] = useState(false);
 
     const handleChange = (panel) => (event, newExpanded) => setExpanded(newExpanded ? panel: false);
+
+    const sliceObject = (obj,filterOutArr) => {
+        return Object.keys(obj)
+            .filter((key) => !filterOutArr.includes(key))
+            .reduce((result,k) => {
+                    result[k] = obj[k];
+                    return result}, {});
+    }
     
     return (
             dataArr.map((val,index) => {
@@ -46,7 +48,9 @@ function InboxList(props) {
                             </Grid>
                         </Grid>
                     </ExpansionPanelSummary>
-                    <InboxListDetails data={val} index={index} />
+                    <InboxListDetails 
+                        data={ sliceObject(val,nonDetailsCols)} 
+                        index={index} />
                 </ExpansionPanel>)
             })
     );
