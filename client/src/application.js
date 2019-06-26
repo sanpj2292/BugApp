@@ -93,7 +93,7 @@ class Application extends Component {
                             variant='indeterminate' color='secondary' />
                     </div>):null}
                 {(this.state.data.length > 0) ?
-                    (<div className="App search-input">
+                    (<div className={this.state.loading ? "App search-input app-disabled":"App search-input"}>
                         <Input 
                             placeholder='Search using dpr or Task summaries'
                             type='search' fullWidth={true} 
