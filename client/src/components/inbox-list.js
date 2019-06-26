@@ -7,7 +7,7 @@ import updateButtonStyles from "../styles/update-button-styles";
 
 function InboxList(props) {
     const classes = updateButtonStyles();
-    const {dataArr,iconClass,nonDetailsCols} = {...props}
+    const {dataArr,iconClass,nonDetailsCols,idcol,key} = {...props}
 
     const [expanded, setExpanded] = useState(false);
 
@@ -15,7 +15,7 @@ function InboxList(props) {
 
     const sliceObject = (obj,filterOutArr) => {
         return Object.keys(obj)
-            .filter((key) => !filterOutArr.includes(key))
+            .filter((key) => !filterOutArr.includes(key)&& key!== '__v' && key !== '_id')
             .reduce((result,k) => {
                     result[k] = obj[k];
                     return result}, {});
@@ -30,16 +30,19 @@ function InboxList(props) {
                     <ExpansionPanelSummary aria-controls={'panel'+index+"-content"} 
                         id={'panel'+index+"-header"}>
                         <Grid container justify='space-between'>
-                            <Grid item key={'summary'+index+'-key'} xs={2}>
-                                <Typography>{val.summary}</Typography>
+                            <Grid item key={key+'-'+idcol+index+'-key'} xs={2}>
+                                <Typography>{val[idcol]}</Typography>
                             </Grid>
-                            <Grid item key={'progress'+index+'-key'} xs={2}>
+                            <Grid item key={key+'-'+'summary'+index+'-key'} xs={2}>
+                                <Typography>{val.Summary}</Typography>
+                            </Grid>
+                            <Grid item key={key+'-'+'progress'+index+'-key'} xs={2}>
                                 <ColoredLabelColumn value={val.Progress} />
                             </Grid>
-                            <Grid item key={'importance'+index+'-key'} xs={2}>
+                            <Grid item key={key+'-'+'importance'+index+'-key'} xs={2}>
                                 <ColoredLabelColumn value={val.Importance} />
                             </Grid>
-                            <Grid item key={'update'+index+'-button'} xs={2}>
+                            <Grid item key={key+'-'+'update'+index+'-button'} xs={2}>
                                 <IconButton 
                                     className={classes.button}
                                     aria-label='Check' id={'update'+index+'-button'}>
@@ -50,7 +53,8 @@ function InboxList(props) {
                     </ExpansionPanelSummary>
                     <InboxListDetails 
                         data={ sliceObject(val,nonDetailsCols) } 
-                        index={index} />
+                        index={index} 
+                        key={key}/>
                 </ExpansionPanel>)
             })
     );

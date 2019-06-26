@@ -2,12 +2,13 @@ import {makeStyles, createStyles} from './styles';
 
 export default makeStyles(theme => createStyles({
     root: {
-        fontWeight: 'bold !important',
+        fontWeight: 'bold',
         alignItems: 'center',
         padding: theme.spacing(0.5),
     },
     New:{
         backgroundColor: '#4169E1',
+        color: '#FFFFF8',
     },
     Developing:{
         backgroundColor: '#F4A460'
@@ -25,13 +26,16 @@ export default makeStyles(theme => createStyles({
         backgroundColor: '#B0C4DE',
     },
     High: {
-        backgroundColor: '#BC8F8F',
+        backgroundColor: '#ffaa00',
     },
     Highest:{
         backgroundColor: '#D2691E',
-        color: '#FFFFFF'
+        color: '#FFFFF8',
     },
     Middle: {
         backgroundColor: '#FFE4E1',
+    },
+    DevelopConfirming: {
+        backgroundColor: '#aaff55',
     }
 }))
