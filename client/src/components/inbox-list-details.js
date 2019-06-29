@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { ExpansionPanelDetails, TextField, Paper } from "@material-ui/core";
 import InboxList from "./inbox-list";
@@ -7,7 +7,6 @@ import iconStyles from "../styles/update-icon-styles";
 const useStyles = makeStyles(theme => createStyles({
     textField: {
         margin: theme.spacing(1),
-        // marginRight: theme.spacing(1),
     },
     container: {
         display: 'flex',

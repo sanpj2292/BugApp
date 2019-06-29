@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Table,TableBody,TableCell,TableHead, TableRow } from "@material-ui/core";
+import { Table,TableBody,TableCell,TableHead, TableRow } from "@material-ui/core";
 
 function StatGrid(props) {
     const {gridData,headers} = {...props};

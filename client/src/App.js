@@ -3,7 +3,7 @@ import './css/App.css';
 import InboxList from "./components/inbox-list";
 import updateIconStyles from "./styles/update-icon-styles";
 import { makeStyles,createStyles } from './styles/styles';
-import { AppBar,Paper,Toolbar, Typography } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => createStyles({
   paper: {
