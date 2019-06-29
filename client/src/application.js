@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import App from './App';
 import './css/App.css';
-import { AppBar,Toolbar,Typography,CircularProgress, Input } from "@material-ui/core";
+import { Button,AppBar,Toolbar,Typography,CircularProgress, Input } from "@material-ui/core";
 import Toaster from "./components/toaster";
+import StatDialog from "./components/stat-dialog";
 
 class Application extends Component {
     constructor() {
@@ -15,7 +16,12 @@ class Application extends Component {
                 open: false,
                 message: '',
             },
+            modal:{
+                open:false,
+                data: [],
+            },
         }
+        this.group = this.group.bind(this);
     }
 
     componentDidMount() {
@@ -33,11 +39,24 @@ class Application extends Component {
                     open: false,
                     message: '',
                 },
+                modal:{
+                    open:false,
+                    data: [],
+                },
             });
         }).catch(err => {
             console.error(err);
         })
         this.setState(prevState);
+    }
+
+    group() {
+        var pState = {...this.state};
+        axios.get('/api/group').then(res => {
+            pState.modal.open = true;
+            pState.modal.data = res.data;
+            this.setState(pState);
+        }).then(err => console.error(err))
     }
 
     search(e) {
@@ -85,8 +104,14 @@ class Application extends Component {
                         <Typography  variant='h6'>
                         Bug Trac Application
                         </Typography>
+                        <Button color='secondary' 
+                            onClick={this.group} variant='outlined'>
+                                Just Click!!
+                            </Button>
                     </Toolbar>
                 </AppBar>
+                {this.state.modal.open ? (<StatDialog open={this.state.modal.open}
+                    gridData={this.state.modal.data} />):null}
                 {this.state.loading ? 
                     (<div className='div-progress'>
                         <CircularProgress className='progress' 
@@ -97,7 +122,8 @@ class Application extends Component {
                         <Input 
                             placeholder='Search using dpr or Task summaries'
                             type='search' fullWidth={true} 
-                            onKeyDown={e => this.search(e)}></Input>
+                            onKeyDown={e => this.search(e)}
+                            ></Input>
                         <App data={this.state.data}></App>
                     </div>):null}
                 {this.state.toaster.open ? (<Toaster open={this.state.toaster.open} 

@@ -107,4 +107,38 @@ router.get('/search', (req,res,nex) => {
     })
 });
 
+router.get('/group', (req,res,next) => {
+  PrmSchema.aggregate([
+    {$unwind: '$RelationTickets'},
+    {
+      $group:{
+        _id: {
+          importance: '$RelationTickets.Importance',
+          status: '$RelationTickets.Progress'
+        },
+        count: {$sum: 1},
+      }
+    },
+    {
+      $group: {
+        _id: '$_id.importance',
+        status_grp: {
+          $push:{
+            k: '$_id.status',
+            v: '$count'
+          }
+        }
+      },
+    },{
+      $project: {
+        status_grp:{$arrayToObject: '$status_grp'}
+      }
+    }
+  ]).exec((err, result) => {
+    console.log(result);
+    res.status(201).send(result);
+  })
+})
+
+
 module.exports = router;
