@@ -1,11 +1,15 @@
 import React from "react";
 import { Table,TableBody,TableCell,TableHead, TableRow, TableFooter, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
-    footTitle:{
+const useStyles = makeStyles(theme => createStyles({
+    cumSum:{
         fontWeight: "bold",
         fontSize: '95.5%',
+    },
+    total: {
+        fontWeight: theme.typography.fontWeightMedium,
+        fontSize: '85.5%',
     }
 }))
 const cumSumArr = (arr) => {
@@ -48,15 +52,15 @@ function StatGrid(props) {
             </TableBody>
             <TableFooter>
                 <TableRow>
-                    <TableCell className={classes.footTitle}>
+                    <TableCell className={classes.total}>
                     Total
                     </TableCell>
-                    {Object.keys(totalMap).map(status => <TableCell>{totalMap[status]}</TableCell>)}
+                    {Object.keys(totalMap).map(status => <TableCell className={classes.total}>{totalMap[status]}</TableCell>)}
                 </TableRow>
                 <TableRow>
-                    <TableCell className={classes.footTitle}>CumulativeSum</TableCell>
+                    <TableCell className={classes.cumSum}>CumulativeSum</TableCell>
                     {cumSumArr(Object.values(totalMap)).map(totCnt => {
-                        return <TableCell className={classes.footTitle}>{totCnt}</TableCell>
+                        return <TableCell className={classes.cumSum}>{totCnt}</TableCell>
                     })}
                 </TableRow>
             </TableFooter>
