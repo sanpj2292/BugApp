@@ -54,7 +54,7 @@ function InboxList(props) {
                     <InboxListDetails 
                         data={ sliceObject(val,nonDetailsCols) } 
                         index={index} 
-                        key={key}/>
+                        key={key+'-details'+index}/>
                 </ExpansionPanel>)
             })
     );

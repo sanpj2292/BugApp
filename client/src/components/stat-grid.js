@@ -31,7 +31,7 @@ function StatGrid(props) {
                 <TableRow>
                     <TableCell>Importance</TableCell>
                     {headers.map(header => {
-                       return <TableCell>{header}</TableCell>
+                       return <TableCell key={header}>{header}</TableCell>
                     })}
                 </TableRow>
             </TableHead>
@@ -55,12 +55,15 @@ function StatGrid(props) {
                     <TableCell className={classes.total}>
                     Total
                     </TableCell>
-                    {Object.keys(totalMap).map(status => <TableCell className={classes.total}>{totalMap[status]}</TableCell>)}
+                    {Object.keys(totalMap).map((status,ind) => (<TableCell 
+                        className={classes.total}
+                        key={'status-'+status+ind}>{totalMap[status]}</TableCell>))}
                 </TableRow>
                 <TableRow>
                     <TableCell className={classes.cumSum}>CumulativeSum</TableCell>
-                    {cumSumArr(Object.values(totalMap)).map(totCnt => {
-                        return <TableCell className={classes.cumSum}>{totCnt}</TableCell>
+                    {cumSumArr(Object.values(totalMap)).map((totCnt,ind) => {
+                        return (<TableCell key={'cum-sum-'+totCnt+''+ind} 
+                            className={classes.cumSum}>{totCnt}</TableCell>)
                     })}
                 </TableRow>
             </TableFooter>

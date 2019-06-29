@@ -26,10 +26,10 @@ function InboxListDetails(props) {
     return (
         <ExpansionPanelDetails className={classes.container}>
             {
-                Object.keys(data).map(k => {
+                Object.keys(data).map((k,ind) => {
                     return (k !== 'RelationTickets'?
                     <TextField
-                        id={k+"-input"+index}
+                        id={k+"-input"+index+''+ind}
                         label={k}
                         key={key+'-'+'text-field'+k+index+'-key'}
                         defaultValue={data[k]}
@@ -41,7 +41,7 @@ function InboxListDetails(props) {
                         variant="outlined"
                       />:<Paper className={classes.paper} elevation={5}>
                           <InboxList dataArr={data[k]} className={iconStyles().icon} 
-                            key={key+'-bug-task-'} idcol={'BugId'} 
+                            key={key+'-bug-task-'+''+ind} idcol={'BugId'} 
                             nonDetailsCols={nonDetailCols}/>
                         </Paper>)
                 })
