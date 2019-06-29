@@ -52,11 +52,14 @@ class Application extends Component {
 
     group() {
         var pState = {...this.state};
+        pState.loading = true;
         axios.get('/api/group').then(res => {
+            pState.loading = false;
             pState.modal.open = true;
             pState.modal.data = res.data;
             this.setState(pState);
         }).then(err => console.error(err))
+        this.setState(pState);
     }
 
     search(e) {

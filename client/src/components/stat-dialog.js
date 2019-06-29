@@ -34,9 +34,9 @@ function StatDialog(props) {
 
     return (
         <div>
-            <Modal open={!close} onEscapeKeyDown={handleClose}>
+            <Modal open={!close} onEscapeKeyDown={handleClose} onBackdropClick={handleClose}>
                 <div className={classes.paper}>
-                <StatGrid gridData={gridData} headers={headers}/>
+                    <StatGrid gridData={gridData} headers={headers}/>
                 </div>
             </Modal>
         </div>
