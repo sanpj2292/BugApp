@@ -11,10 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var prmRouter = require('./routes/prm-routes');
 
-mongoose.connect('mongodb://localhost:27017/mydb', 
-{
-  useNewUrlParser: true}
-);
+mongoose.connect('mongodb://localhost:27017/mydb', {useNewUrlParser: true});
 
 mongoose.connection.on('once', () => {
   console.log('COnnected to DB!!!');

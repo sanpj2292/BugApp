@@ -1,6 +1,6 @@
 import React, {useState, useLayoutEffect} from 'react';
 import { makeStyles, createStyles} from "@material-ui/core/styles";
-import { Modal, Button } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import StatGrid from "./stat-grid";
 
 const useStyles = makeStyles(theme => createStyles({
