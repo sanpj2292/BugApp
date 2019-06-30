@@ -101,12 +101,16 @@ class Application extends Component {
     }
 
     updateBugDetails(e) {
-        alert('update method --> go to console');
+        let pState = {...this.state};
+        pState.loading = true;
         let key = e.currentTarget.id.startsWith('bug') ? 'BugId':'DprId';
         let param = {[key]: e.currentTarget.parentElement.parentElement.children[0].innerText};
-        axios.post('/api/update',param).then(res => {
-            alert('For now returning vals');
+        axios.post('/api/updateSingle',param).then(res => {
+            pState.data = res.data;
+            pState.loading = false;
+            this.setState(pState);
         }).catch(err => console.error(err));
+        this.setState(pState);
     }
 
     render() {

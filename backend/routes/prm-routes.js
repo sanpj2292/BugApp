@@ -140,12 +140,26 @@ router.get('/group', (req,res,next) => {
   })
 });
 
-router.post('/update', (req,res,next) => {
-  console.log(req.body);
-  PrmSchema.find({}, (err, docs) => {
-    if(err) console.error(err);
-    res.status(201).send(docs);
-  });
+router.post('/updateSingle', (req,res,next) => {
+  let searchCol = '', updateCol = 'Progress';
+  let key = Object.keys(req.body)[0];
+  if (key === 'BugId') {
+    searchCol = 'RelationTickets.BugId';
+    updateCol = 'RelationTickets.$.'+updateCol;
+  } else {
+    searchCol = 'DprId';
+  }
+  // This is a sample update source code
+  // PRM Data Acquisition is required which will then be updated to MongoDB
+  PrmSchema.update({[searchCol]:req.body[key]},
+    {$set:{[updateCol]: 'Evaluated'}},
+    (error, d) => {
+      if (error) console.error(error);
+      PrmSchema.find({}, (err, docs) => {
+        if(err) console.error(err);
+        res.status(201).send(docs);
+      });
+  })
 
 });
 
