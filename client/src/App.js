@@ -17,12 +17,13 @@ function App(props) {
   const iconClasses = updateIconStyles();
   const appClasses = useStyles();
   const nonDetailCols = ['DprId','Importance','Progress','Summary'];
-  const {data} = {...props};
+  const {data,updateBugDetails} = {...props};
   return (
       <div className="App">
         <Paper className={appClasses.paper} elevation={5}>
           <InboxList dataArr={data} iconClass={iconClasses.icon} idcol='DprId'
-            nonDetailsCols={nonDetailCols} key='dpr'></InboxList>
+            nonDetailsCols={nonDetailCols} uKey='dpr'
+            updateBugDetails={updateBugDetails}></InboxList>
         </Paper>
       </div>
   );

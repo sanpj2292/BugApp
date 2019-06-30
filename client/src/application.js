@@ -22,6 +22,7 @@ class Application extends Component {
             },
         }
         this.group = this.group.bind(this);
+        this.updateBugDetails = this.updateBugDetails.bind(this);
     }
 
     componentDidMount() {
@@ -99,6 +100,15 @@ class Application extends Component {
         }
     }
 
+    updateBugDetails(e) {
+        alert('update method --> go to console');
+        let key = e.currentTarget.id.startsWith('bug') ? 'BugId':'DprId';
+        let param = {[key]: e.currentTarget.parentElement.parentElement.children[0].innerText};
+        axios.post('/api/update',param).then(res => {
+            alert('For now returning vals');
+        }).catch(err => console.error(err));
+    }
+
     render() {
         return (
             <div>
@@ -127,7 +137,7 @@ class Application extends Component {
                             type='search' fullWidth={true} 
                             onKeyDown={e => this.search(e)}
                             ></Input>
-                        <App data={this.state.data}></App>
+                        <App data={this.state.data} updateBugDetails={this.updateBugDetails}></App>
                     </div>):null}
                 {this.state.toaster.open ? (<Toaster open={this.state.toaster.open} 
                     message={this.state.toaster.message} ></Toaster>) : null}

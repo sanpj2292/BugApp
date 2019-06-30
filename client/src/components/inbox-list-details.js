@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => createStyles({
 
 function InboxListDetails(props) {
     const classes = useStyles();
-    const {data,index,key} = {...props};
+    const {data,index,uKey,updateBugDetails} = {...props};
     const nonDetailCols = ['BugId','Importance','Progress','Summary'];
     return (
         <ExpansionPanelDetails className={classes.container}>
@@ -31,7 +31,7 @@ function InboxListDetails(props) {
                     <TextField
                         id={k+"-input"+index+''+ind}
                         label={k}
-                        key={key+'-'+'text-field'+k+index+'-key'}
+                        key={uKey+'-'+'text-field'+k+index+'-key'}
                         defaultValue={data[k]}
                         className={classes.textField}
                         margin="normal"
@@ -41,8 +41,9 @@ function InboxListDetails(props) {
                         variant="outlined"
                       />:<Paper className={classes.paper} elevation={5}>
                           <InboxList dataArr={data[k]} className={iconStyles().icon} 
-                            key={key+'-bug-task-'+''+ind} idcol={'BugId'} 
-                            nonDetailsCols={nonDetailCols}/>
+                            uKey={'bug'+''+ind} idcol={'BugId'} 
+                            nonDetailsCols={nonDetailCols} 
+                            updateBugDetails={updateBugDetails}/>
                         </Paper>)
                 })
             }

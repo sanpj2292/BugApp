@@ -138,7 +138,16 @@ router.get('/group', (req,res,next) => {
     console.log(result);
     res.status(201).send(result);
   })
-})
+});
+
+router.post('/update', (req,res,next) => {
+  console.log(req.body);
+  PrmSchema.find({}, (err, docs) => {
+    if(err) console.error(err);
+    res.status(201).send(docs);
+  });
+
+});
 
 
 module.exports = router;
